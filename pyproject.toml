@@ -1,0 +1,47 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages=["src"]
+
+[project]
+name = "Ollama-GraphRAG-App"
+version = "0.1.0"
+description = "A GraphRAG Application using Llama3.1 and a neo4j graph db"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Prince Cheruvathur", email = "prncher@gmail.com" },
+]
+keywords = ["python", "GraphRAG", "neo4j", "knowledge graph"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "python-dotenv",
+    "langchain-neo4j",
+    "neo4j-graphrag[ollama]",
+    "langchain>=0.3",
+    "langchain-ollama>=0.3.0",
+    "langchain-core>=0.3.0",
+    "langchain_community>=0.3.0",
+    "langchain-text-splitters",
+    "beautifulsoup4>=4.14.0",
+    "tiktoken>=0.8.0",
+    "scikit-learn>=1.7.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+]
+
+[project.urls]
+Homepage = "https://github.com/prncher/Ollama-GraphRAG-App"
+Repository = "https://github.com/prncher/Ollama-GraphRAG-App"

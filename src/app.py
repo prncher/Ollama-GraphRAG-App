@@ -1,22 +1,16 @@
-import argparse
 import asyncio
 import os
-from langchain_ollama import ChatOllama, OllamaEmbeddings
+from langchain_ollama import ChatOllama
 from dotenv import load_dotenv
 
 import ollama
-from sklearn.preprocessing import normalize
-from neo4j_graphrag.retrievers import VectorRetriever
 from neo4j import GraphDatabase
 from neo4j_graphrag.indexes import create_vector_index, drop_index_if_exists, upsert_vectors
 
-from neo4j_graphrag.indexes import upsert_vector
-from neo4j_graphrag.generation import GraphRAG
-from neo4j_graphrag.generation.types import RagResultModel
 from neo4j_graphrag.retrievers import Text2CypherRetriever
-from neo4j_graphrag.schema import get_schema
 from neo4j_graphrag.types import RetrieverResultItem
 from langchain_neo4j import Neo4jGraph
+import json
 
 class Application:
     def __init__(self,username,password):
@@ -102,8 +96,9 @@ class Application:
         
 
             for i, item in enumerate(result.items):
-                print(f"Result {i}: {item.content}")
-                print(f"Metadata: {item.metadata}")
+                print(json.dumps(item.content, indent=2, sort_keys=True, ensure_ascii=False, separators=(',', ': ')))
+
+                #print(f"Result {i}: {item.content}")
         except Exception as e:
             print(f"Exception in run: {e}")
         finally:
